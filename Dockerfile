@@ -46,4 +46,5 @@ EXPOSE 50000
 # Expose Jenkins HTTP Port
 EXPOSE 8080
 
-
+USER jenkins
+RUN jenkins-plugin-cli --plugins "prometheus-metrics git maven gradle pipeline folders"
