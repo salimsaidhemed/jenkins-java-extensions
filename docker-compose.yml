@@ -1,0 +1,29 @@
+version: "3.8"
+
+volumes:
+  jenkins-data: {}
+  jenkins-docker-certs: {}
+
+networks:
+  jenkins: {}
+
+services:
+  jenkins:
+    container_name: jenkins
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MAVEN_VERSION: ${MAVEN_VERSION}
+        GRADLE_VERSION: ${GRADLE_VERSION}
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    ports:
+      - 8080:8080
+      - 50000:50000
+    
+
+  
